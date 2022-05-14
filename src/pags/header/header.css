@@ -1,0 +1,47 @@
+#cabecalho {
+    display: flex;
+    background-color: #fff;
+    justify-content: space-around;
+    align-items: center;
+    padding: 0.5% 20% 0.5% 20%;
+  }
+  
+  #login{
+    display: flex;
+    width: 230px;
+    justify-content: space-between;
+  }
+  
+  .btn-cabecalho {
+    background-color: #44749d;
+    color: white;
+    border-radius: 8px;
+    font-size: medium;
+    font-weight: bold;
+    padding: 10px 20px 10px 20px;
+    border-style: hidden;
+  }
+  
+  .btn-cabecalho:hover {
+    background-color: #2b5166;
+  }
+  
+  .btn-cabecalho-att{
+    background-color: #672c70;
+    color: #fff;
+    border-radius: 8px;
+    font-size: medium;
+    font-weight: bold;
+    padding: 10px 20px 10px 20px;
+    border-style: hidden;
+  }
+  
+  .btn-cabecalho-att:hover{
+    background-color: #300536;
+  }
+  
+  a{
+    text-decoration: none;
+    color:inherit
+  }
+  
