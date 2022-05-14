@@ -1,0 +1,33 @@
+#corpo_home{
+    width: 100%;
+}
+#corpo_home img{
+    top: 0;
+    position: fixed;
+    z-index: -1;
+    width: 100%;
+}
+
+#paper_home{
+    margin: 5% 20% 4%;
+    background-color: #fff;
+    height: 52vh;
+    border-radius: 12px;
+    padding: 1%;
+
+
+}
+
+
+#menu{
+    display: flex;
+    justify-content: space-around;
+    background-image: radial-gradient(circle at 10% -20.71%, #96536f 0, #904c6f 10%, #88446f 20%, #7f3c6f 30%, #743470 40%, #672c70 50%, #582571 60%, #462172 70%, #301f73 80%, #021e75 90%, #001e76 100%);
+    padding: 10% 0 ;
+    border-radius: 12px;
+}
+
+h1 {
+    text-align: center;
+    color: #672c70;
+}
