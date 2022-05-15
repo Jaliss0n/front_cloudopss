@@ -33,7 +33,7 @@ function Home() {
                             </CardActionArea>
                             <CardActions>
                                 <Button size="small" variant='contained' color="secondary">
-                                    Acessar
+                                <a href='/gerencia'>Acessar</a>
                                 </Button>
                             </CardActions>
                         </Card>

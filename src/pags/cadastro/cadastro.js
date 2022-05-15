@@ -24,27 +24,6 @@ function Cadastro () {
    
 
     const { control, handleSubmit } = useForm();
-
-    
-    /*function envia () {
-        fetch("http://127.0.0.1:8000/cadastra/", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(data),
-        mode: 'no-cors'
-      })
-        .then((response) => response.json())
-        .then((data) => {
-          console.log("Success:", data);
-        })
-        .catch((error) => {
-          console.error("Error:", error);
-        });
-    }*/
-
-    
     
     const onSubmit = function (data) {
         
@@ -58,35 +37,13 @@ function Cadastro () {
             }
         };
         
-        axios.post("http://127.0.0.1:3030/cadastra/",JSON.stringify(data), axiosConfig)
+        axios.post("http://127.0.0.1:8000/cadastra/",JSON.stringify(data), axiosConfig)
         .then(data => {
             console.log(data, typeof data)
         }).catch(err => {
             console.log(err)
         })
     }
-
-    
-    /*fetch("http://127.0.0.1:8000/cadastra/", {
-        method: "POST",
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({data}), mode: 'no-cors'})
-        .then((data) => data.json())
-        .then((data) => console.log(data.data))*/
-    
-    /*axios.post("http://127.0.0.1:8000/cadastra/", JSON.stringify(data))
-        .then(() => {
-            console.log("Sucesso")
-        })
-        .catch(() => {
-            console.log(typeof data, data)
-        })*/
-
-
-    
-    
 
     const Transition = React.forwardRef(function Transition(props, ref) {
         return <Slide direction="up" ref={ref} {...props} />;
@@ -221,7 +178,7 @@ function Cadastro () {
 
                             <div id='btn-home'>
                                 <Button type='reset' variant="contained" color ='error' startIcon={<DeleteIcon />}>
-                                    Limpar
+                                    <a href='/cadastro'>Limpar</a>
                                 </Button>
 
                                 <Button onClick={handleClickOpen} type='submit' variant="contained" endIcon={<SendIcon />}>
@@ -231,20 +188,21 @@ function Cadastro () {
                                     open={open}
                                     TransitionComponent={Transition}
                                     keepMounted
-                                    onClose={handleClose}
+                                    onClose={<a href='/home'></a>}
                                     aria-describedby="alert-dialog-slide-description"
                                 >
                                     <DialogTitle>{"Suas Informações foram Enviadas !!!"}</DialogTitle>
                                     
                                     <DialogContent>
                                         <DialogContentText id="alert-dialog-slide-description">
-                                            Let Google help apps determine location. This means sending anonymous
-                                            location data to Google, even when no apps are running.
+                                            Seus dadaos foram eviados com sucesso.
+                                            Clique no menu Gerenciador, ou botão prosseguir logo abaixo
+                                            para ver as alterações que foram realizadas. 
                                         </DialogContentText>
                                     </DialogContent>
                                     <DialogActions>
-                                        <Button color='secondary' onClick={handleClose}>Reiniciar</Button>
-                                        <Button color='secondary'onClick={handleClose}>Proceguir</Button>
+                                        <Button color='secondary'><a href='/cadastro'>Reiniciar</a></Button>
+                                        <Button color='secondary'><a href='/gerencia'>Proceguir</a></Button>
                                     </DialogActions>
                                 </Dialog>
                             </div>

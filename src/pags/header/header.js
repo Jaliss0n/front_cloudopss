@@ -19,7 +19,7 @@ function Cabecalho() {
         
         <ThemeProvider theme={theme}>
           <aside id='login'>
-            <button className='btn-cabecalho-att'><a href='/login'>Gerenciador</a></button>
+            <button className='btn-cabecalho-att'><a href='/gerencia'>Gerenciador</a></button>
             <button className='btn-cabecalho-att'><a href='/cadastro'>Novo Usuario</a></button>
           </aside>
         </ThemeProvider>

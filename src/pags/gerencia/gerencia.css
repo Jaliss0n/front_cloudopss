@@ -1,0 +1,13 @@
+#corpo_tabela img{
+    top: 0;
+    position: fixed;
+    z-index: -1;
+    width: 100%;
+}
+
+#paper{
+    margin: 130px 20% 0;
+    background-color: #fff;
+    padding: 1%;
+    border-radius: 12px;
+}
