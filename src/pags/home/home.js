@@ -1,25 +1,45 @@
 import React from "react";
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
-import CardMedia from '@mui/material/CardMedia';
 import Typography from '@mui/material/Typography';
-import { Button, CardActionArea, CardActions } from '@mui/material';
+import { Box, Button, CardActionArea, CardActions, Container, Paper } from '@mui/material';
 import background_home from '../../img/background_home.jpg'
-import './home.css';
-import { ThemeProvider } from "@mui/system";
-import theme from "../../styles/styles";
+import '../../styles/geral.css';
+import styled from "@emotion/styled";
 
-function Home() {
+const Box_home = styled(Box)(({theme}) => ({
+    display: 'flex',
+    borderRadius: '12px',
+    flexDirection: 'column',
+    justifyContent: 'space-around',
+    padding: "10% 20%",
+    justifyContent: 'center',
+    backgroundImage: 'radial-gradient(circle at 10% -20.71%, #96536f 0, #904c6f 10%, #88446f 20%, #7f3c6f 30%, #743470 40%, #672c70 50%, #582571 60%, #462172 70%, #301f73 80%, #021e75 90%, #001e76 100%)',
+    gap: '100px',
+    [theme.breakpoints.up("md")]:{
+        flexDirection: 'row',
+        justifyContent: 'space-around',
+        padding:'10% 3%',
+        backgroundImage: 'radial-gradient(circle at 10% -20.71%, #96536f 0, #904c6f 10%, #88446f 20%, #7f3c6f 30%, #743470 40%, #672c70 50%, #582571 60%, #462172 70%, #301f73 80%, #021e75 90%, #001e76 100%)',
+    }
+}))
+
+export default function Home() {
 
     return(
-        <div id='corpo_home'>
-            <img src={background_home}/>
-
-            <div id="paper_home">
-                <h1>Sistema de Gerenciamento de usuarios.</h1>
-                <div id="menu">
-
-                    <ThemeProvider theme={theme}>
+        <Box>
+            <img className="background" src={background_home}/>
+            <Container sx={{}}>
+                <Paper sx={{
+                    display: 'flex',
+                    flexDirection: 'column',
+                    padding: '50px', 
+                    justifyContent: 'center',
+                    marginTop: '150px',
+                    borderRadius: '20px',
+                }}>
+                    <h1>Sistema de Gerenciamento de usuarios.</h1>
+                    <Box_home>
                         <Card sx={{ maxWidth: 345, padding: 2}}>
                             <CardActionArea>
                                 <CardContent>
@@ -56,14 +76,9 @@ function Home() {
                                 </Button>
                             </CardActions>
                         </Card>
-                    </ThemeProvider>
-                    
-                    
-                </div>
-            </div>
-        </div>
-        
+                    </Box_home>
+                </Paper>
+            </Container>
+        </Box>
     )
 }
-
-export default Home;

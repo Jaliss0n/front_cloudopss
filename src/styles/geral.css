@@ -1,0 +1,60 @@
+h1 {
+    text-align: center;
+    color: #672c70;
+}
+
+h5{
+    font-size: 1rem;
+    margin: 0;
+    color: white;
+}
+
+h6{
+    font-size: 2rem;
+    margin: 20px 2px 20px;
+    color: #fff;
+}
+
+.background{
+    top: 0;
+    position: fixed;
+    z-index: -1;
+    background-repeat:no-repeat;
+    background-size:cover;
+    background-position:center;
+}
+
+a {
+    text-decoration: none;
+    color: #fff;
+}
+
+/* cadastro.js*/
+form {
+    background-image: radial-gradient(circle at 10% -20.71%, #96536f 0, #904c6f 10%, #88446f 20%, #7f3c6f 30%, #743470 40%, #672c70 50%, #582571 60%, #462172 70%, #301f73 80%, #021e75 90%, #001e76 100%);
+    border-radius: 12px;
+    padding: 30px;
+}
+
+input{
+    color: #fff;
+}
+
+.custom-file-upload {
+    border: 1px solid #fff;
+    display: inline-block;
+    padding: 10px 10px;
+    cursor: pointer;
+}
+
+.custom-file-upload h6 {
+    font-size: 1.4rem;
+    margin: 4px;
+}
+
+#btn-home{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 10vh;
+}

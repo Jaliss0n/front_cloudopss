@@ -1,10 +1,11 @@
-import React from "react";
+import React, {useEffect} from "react";
 import InputLabel from '@mui/material/InputLabel';
 import Autocomplete from '@mui/material/Autocomplete';
 import Button from '@mui/material/Button';
 import DeleteIcon from '@mui/icons-material/Delete';
 import SendIcon from '@mui/icons-material/Send';
-import bcg_home from '../../img/bcg_home.jpg';
+import bcg_home from '../../../img/bcg_home.jpg';
+import {ThemeProvider } from '@mui/material/styles';
 import { useForm , Controller} from "react-hook-form";
 import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
@@ -12,52 +13,50 @@ import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
 import Slide from '@mui/material/Slide';
-import '../../styles/geral.css';
-import theme from "../../styles/theme";
-import CssTextField from "../../styles/CssTextField";
-import profissoes from "../../styles/listProf";
+import theme from "../../../styles/theme";
+import CssTextField from "../../../styles/CssTextField";
+import profissoes from "../../../styles/listProf";
 import axios from 'axios';
+import { useParams } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { Box, Paper } from "@mui/material";
 
-export default function Cadastro () {
 
-    const { control, handleSubmit } = useForm();
-    
-    const onSubmit = function (data) {
-        let axiosConfig = {
+export default function Edita () {
 
-            mode: 'no-cors',
+    const {cadastra_id} = useParams();
 
-            headers: {
-                'Content-Type': 'application/json;charset=UTF-8',
-                "Access-Control-Allow-Origin": "*",
-            }
-        };
+    const OnSubmit = function (data) {
         
-        axios.post("http://127.0.0.1:8000/cadastras/",JSON.stringify(data), axiosConfig)
+        axios.put(`http://127.0.0.1:8000/cadastras/${cadastra_id}/`,data)
         .then(data => {
             console.log(data, typeof data)
         }).catch(err => {
             console.log(err)
         })
     }
-    ///////////////////////////////popup/////////////////////////////////////
+
+    const { control, handleSubmit } = useForm();
 
     const Transition = React.forwardRef(function Transition(props, ref) {
         return <Slide direction="up" ref={ref} {...props} />;
     });
 
+
     const [open, setOpen] = React.useState(false);
 
     const handleClickOpen = () => setOpen(true);
+
+    const handleClose = () => setOpen(false);
+    
     
     return(
         <Box sx={{
             display: 'flex',
             justifyContent: 'center',
         }}>
-
             <img className="background" src={bcg_home}/>
+
             <Paper sx={{
                 display: 'flex',
                 flexDirection: 'column',
@@ -69,10 +68,9 @@ export default function Cadastro () {
                     width:'60%'
                 }
             }}>
+                <h1>Atualização de usuario</h1>
 
-                <h1>Cadastro de Usuario</h1>
-
-                <form onSubmit={handleSubmit(onSubmit)}>
+                <form onSubmit={handleSubmit(OnSubmit)} >
                     <Box sx={{
                         display: 'flex',
                         flexDirection:'row',
@@ -160,6 +158,7 @@ export default function Cadastro () {
                                     />
                                 )}
                             />
+                        
                         </Box>
 
                         <Box sx={{
@@ -176,13 +175,14 @@ export default function Cadastro () {
                         }}>
                             <div>
                                 <InputLabel shrink htmlFor="bootstrap-input">
-                                    <h6>Profissão</h6>
+                                    <h6>Selecione uma Profissão</h6>
                                 </InputLabel>
                                 <Controller 
                                     name='prof'
                                     control={control}
                                     render={({field: {onChange, value} }) => (
                                         <Autocomplete
+                                            
                                             disablePortal
                                             options={profissoes}
                                             sx={{ width: 300 }}
@@ -195,13 +195,15 @@ export default function Cadastro () {
                                         />
                                     )}
                                 />
-
                             </div>
+                            
+                                
                             
                             <label class="custom-file-upload">
                                 <h6>Curriculo</h6>
                                 <input type= "file" name="Upload" accept="application/pdf"/>
                             </label>
+
 
                             <div id='btn-home'>
                                 <Button type='reset' variant="contained" color ='error' startIcon={<DeleteIcon />}>
@@ -209,8 +211,10 @@ export default function Cadastro () {
                                 </Button>
 
                                 <Button onClick={handleClickOpen} type='submit' variant="contained" endIcon={<SendIcon />}>
-                                    Enviar
+                                    Atualizar
                                 </Button>
+
+
                                 <Dialog
                                     open={open}
                                     TransitionComponent={Transition}
@@ -222,14 +226,13 @@ export default function Cadastro () {
                                     
                                     <DialogContent>
                                         <DialogContentText id="alert-dialog-slide-description">
-                                            Seus dadaos foram eviados com sucesso.
+                                            Seus dadaos foram Atualizados com sucesso.
                                             Clique no menu Gerenciador, ou botão prosseguir logo abaixo
                                             para ver as alterações que foram realizadas. 
                                         </DialogContentText>
                                     </DialogContent>
                                     <DialogActions>
-                                        <Button color='secondary'><a style={{color: '#672c70'}} href='/cadastro'>Reiniciar</a></Button>
-                                        <Button color='secondary'><a style={{color: '#672c70'}}href='/gerencia'>Proceguir</a></Button>
+                                        <Button color='secondary'><a style={{color: '#672c70'}} href='/gerencia'>Proceguir</a></Button>
                                     </DialogActions>
                                 </Dialog>
                             </div>

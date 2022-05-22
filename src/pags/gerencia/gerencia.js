@@ -1,5 +1,5 @@
 import React, {useEffect,useState} from "react";
-import "./gerencia.css";
+import "../../styles/geral.css";
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
 import TableContainer from '@mui/material/TableContainer';
@@ -12,14 +12,36 @@ import StyledTableCell from "../../styles/StyledTableCell";
 import StyledTableRow from "../../styles/StyledTableRow";
 import DeleteForeverOutlinedIcon from '@mui/icons-material/DeleteForeverOutlined';
 import EditOutlinedIcon from '@mui/icons-material/EditOutlined';
-import { IconButton } from "@mui/material";
+import { Box, IconButton } from "@mui/material";
+import { Link } from "react-router-dom";
+import Dialog from '@mui/material/Dialog';
+import DialogActions from '@mui/material/DialogActions';
+import DialogContent from '@mui/material/DialogContent';
+import DialogContentText from '@mui/material/DialogContentText';
+import DialogTitle from '@mui/material/DialogTitle';
+import Button from '@mui/material/Button';
 
-function Gerencia () {
+export default function Gerencia () {
+
+    const [open, setOpen] = React.useState(false);
+
+    const handleClickOpen = (event) => setOpen(true);
+
+    const handleClose = () => setOpen(false);
 
     const [usuario, setUsuario] = useState([]);
 
     useEffect( () =>  {
-        axios.get('http://127.0.0.1:8000/cadastra')
+
+        let axiosConfig = {
+            mode: 'no-cors',
+            headers: {
+                'Content-Type': 'application/json;charset=UTF-8',
+                "Access-Control-Allow-Origin": "*",
+            }
+        };
+
+        axios.get("http://127.0.0.1:8000/cadastras/", axiosConfig)
           .then(res => {
             setUsuario(res.data)
           })
@@ -27,27 +49,21 @@ function Gerencia () {
             console.log(err)
           })
     })
-    
-    const Delete = function (cadastra_id) {
-        axios.delete('http://127.0.0.1:8000/cadastra/8')
-            .then(() => {
-                console.log('DELETADO')
-            })
-            .catch(err => {
-                console.log(err)
-            })
-    }
 
     return (
-        <div id="corpo_tabela" >
-            
-            <img src={back_gerencia}/>
-            <div id="paper">
-                <h1>Gerenciador de Usuarios</h1>
+        <Box sx={{ display:'flex', justifyContent: 'center'}}>
 
+            <img className="background" src={back_gerencia}/>
+            <Paper sx={{
+                display: 'flex',
+                flexDirection: 'column',
+                margin:'150px 0 0',
+                padding: '20px',
+                width: '70%'
+            }}>
+                <h1>Gerenciador de Usuarios</h1>
                 <hr/>
- 
-                <div id="tabela">
+                <Box>
                     <TableContainer component={Paper}>
                         <Table sx={{ minWidth: 700 }} aria-label="customized table">
                             <TableHead>
@@ -71,22 +87,49 @@ function Gerencia () {
                                     <StyledTableCell align="right">{usuarios.end}</StyledTableCell>
                                     <StyledTableCell align="right">{usuarios.prof}</StyledTableCell>
                                     <StyledTableCell align="right">
-                                        <IconButton color="error" onClick={Delete}>
-                                            <DeleteForeverOutlinedIcon/>
+                                        <IconButton color="error" >
+                                            <DeleteForeverOutlinedIcon onClick={handleClickOpen}/>
                                         </IconButton>
                                         <IconButton color='inherit'>
-                                            <EditOutlinedIcon/>
+                                            <Link to={`/gerencia/EDITA/${usuarios.cadastra_id}/`}>
+                                                <EditOutlinedIcon color="secondary"/>
+                                            </Link>
                                         </IconButton>
+                                        <Dialog
+                                            open={open}
+                                            onClose={handleClose}
+                                            aria-labelledby="alert-dialog-title"
+                                            aria-describedby="alert-dialog-description"
+                                        >
+                                            <DialogTitle id="alert-dialog-title">
+                                                {"Tem certeza que deseja DELETAR esté usuario?"}
+                                            </DialogTitle>
+                                            <DialogContent>
+                                                <DialogContentText id="alert-dialog-description">
+                                                    Assim que está operacão for confirmada, a mesma não poderá ser revertida.
+                                                </DialogContentText>
+                                            </DialogContent>
+                                            <DialogActions>
+
+                                                <Button color="secondary" onClick={handleClose}>Cancelar</Button>
+
+                                                <Link to={`/gerencia/DELETE/${usuarios.cadastra_id}/`}>
+                                                    <Button color="secondary" onClick={handleClose} autoFocus>
+                                                        Deletar
+                                                    </Button>
+                                                </Link>
+                                            </DialogActions>
+                                        </Dialog>
+                                        
                                     </StyledTableCell>
                                 </StyledTableRow>
+                                
                             ))}
                             </TableBody>
                         </Table>
                     </TableContainer>
-                </div>
-            </div>
-        </div>
+                </Box>
+            </Paper>
+        </Box>
     )
 }
-
-export default Gerencia;
